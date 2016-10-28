@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         padding: 30px;
+        font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serifl
       }
 
       h1 {
@@ -44,7 +49,7 @@
       }
     </style>
   </head>
-  <body class="serif">
+  <body>
     <h1>Movies and stuffff</h1>
     <table>
       <thead>
@@ -62,8 +67,8 @@
     <script id="stuffff-template" type="text/x-handlebars-template">
       <tr>
         <td>{{Title}}{{#if Description}}<br /><span class="description">{{Description}}</span>{{/if}}</td>
+        <td><a href="{{Watch}}" target="_blank">Preview</a></td>
         <td>{{Contributor}}</td>
-        <td><a href="{{Watch}}" target="_blank">{{Watch}}</a></td>
       </tr>
     </script>
 

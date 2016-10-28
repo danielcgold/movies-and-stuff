@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Movies and stuffff</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      body {
+        padding: 30px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      table {
+        opacity: 0;
+        transition: opacity .25s linear;
+        border-collapse: collapse;
+        min-width: 1000px;
+        margin: auto;
+      }
+
+      table.active {
+        opacity: 1;
+      }
+
+      th {
+        text-align: left;
+        background: #eee;
+      }
+
+      th,
+      td {
+        padding: 10px;
+      }
+
+      tr:nth-child(even) td {
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body class="serif">
+    <h1>Movies and stuffff</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Watch</th>
+          <th>Contributor</th>
+        </tr>
+      </thead>
+
+      <tbody class="stuffff">
+      </tbody>
+    </table>
+
+    <script id="stuffff-template" type="text/x-handlebars-template">
+      <tr>
+        <td>{{Title}}{{#if Description}}<br /><span class="description">{{Description}}</span>{{/if}}</td>
+        <td>{{Contributor}}</td>
+        <td><a href="{{Watch}}" target="_blank">{{Watch}}</a></td>
+      </tr>
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.3/tabletop.min.js"></script>
+    <script type="text/javascript">
+      var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1vyXxmCpKn0wLhhy-ItnpZez88CRto1DhaZ-a_iKA-Iw/pubhtml';
+      $(document).ready(function() {
+        Tabletop.init({ key: public_spreadsheet_url,
+                         callback: showInfo,
+                         parseNumbers: true });
+      });
+
+      function showInfo(data, tabletop) {
+        var source   = $("#stuffff-template").html();
+        var template = Handlebars.compile(source);
+
+        $.each(tabletop.sheets("stuffff").all(), function(i, stuffff) {
+          var html = template(stuffff);
+          $(".stuffff").append(html);
+        });
+
+        $('table').addClass('active ');
+      }
+    </script>
+  </body>
+</html>
